@@ -22,4 +22,4 @@ Vert: A-Z-E-S
 Rouges: I-O-P-L.
 ```
 
-big up à [LOSCRAKOS](https://github.com/Zwarex)
+big up à [LOSCRAKOS](https://github.com/Zwarex/Nuit-du-code)
