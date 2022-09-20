@@ -59,9 +59,61 @@ def traitement(data1: list, data2: list)->list:
     OUT:
         tableau de tableaux après les opérations logiques décrites au premier paragraphe
     """
+    identifier = noir_blanc(data1)
+    temoin = noir_blanc(data2)
+    T= []
+    for i in range(len(identifier)):
+        a = []
+        for u in range(len(identifier[i])):
+            x = identifier[i][u] ^ temoin[i][u]
+            a.append(x & temoin[i][u])
+        T.append(a)
+    return T
 
 
-test = get_data_from_image("1.png")
+def ocr(lettre: list)->str:
+    '''Reconnaissance d'une lettre manuscrite par comparaison avec les lettres témoins de l'alphabet.
+    ENTREEE :
+        lettre : tableau des pixels de la lettre manuscrite
+    SORTIE :
+        lettre_identifiee : le caractère ( str ) identifié.
+    '''
+    dico = {} 
+    lettre = noir_blanc(get_data_from_image(lettre))
+    alphabet = [chr(i) for i in range(65,91)]
+    for temoin in alphabet:
+        lettre_temoin = noir_blanc(get_data_from_image(temoin + '.png')) # récupération du tableau des pixels du caractère témoin correspondant à 'temoin'
+        resultat = traitement(lettre, lettre_temoin) # opérations logiques entre les pixels des deux caractères
+        # calcul du pourcentage de pixels blancs ayant disparu après traitement
+        i = 0
+        e = 0
+        for l in resultat:
+            for m in l:
+                e += 1
+                if m == 0:
+                    i += 1
+        a  = i/e*100
+        # placement de ce pourcentage dans le dictionnaire comme valeur associée à la lettre courante
+        dico[temoin] = a
+    
+    # recherche du maximum dans les valeurs du dictionnaire
+    lettre_identifiee = max(dico, key=dico.get)
+    # renvoi du caractère identifié
+    return lettre_identifiee			
+
+			
+    
+
+test = noir_blanc(get_data_from_image("1.png"))
+v = noir_blanc(get_data_from_image("V.png"))
+#print(test)
+#print(v)
+a = traitement(test, v)
+save_image_from_data("test.png", a)
+
+for i in range(1,9):
+    print(ocr(str(i)+".png"), end="")
+print()
 """
 print(test[0], test[5])
 print(test[7][2])
