@@ -1,7 +1,7 @@
 # Nuit du code [2022](https://www.nuitducode.net/ndc2022/T)
 ---
 (On a été évalué avec les terminales car nous avons utilisé la POO)
-![alt-text](https://github.com/NeKroFR/README-files/blob/main/gameplay.png)
+![alt-text](https://i.imgur.com/bCkajYJ.png)
 ```
 Le jeu ce joue à 2. L'objectif est de détruire le chateau adverse, pour ce faire nous invoquons des soldats
 qui ont tous un cout et des statistiques différents. Ce jeu utilise une monnaie par joueur.
